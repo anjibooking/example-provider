@@ -111,7 +111,7 @@ components:
           type: string
         type:
           type: string
-        name:
+        firstName:
           type: string
         version:
           type: string
