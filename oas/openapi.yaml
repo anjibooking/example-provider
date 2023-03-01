@@ -5,6 +5,11 @@ info:
   version: 1.0.0
 servers:
 - url: /
+tags:
+- name: product_model
+  description: |
+    <SchemaDefinition schemaRef="#/components/schemas/Product" />
+  x-displayName: The Product Model
 paths:
   /products:
     get:
@@ -15,7 +20,7 @@ paths:
         "200":
           description: successful operation
           content:
-            application/json;charset=utf-8:
+            application/json; charset=utf-8:
               schema:
                 type: array
                 items:
@@ -45,22 +50,20 @@ paths:
                   id: "1234"
                   type: food
                   price: 42
-                  name: burger
         required: true
       responses:
         "200":
           description: successful operation
           content:
-            application/json;charset=utf-8:
+            application/json; charset=utf-8:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 application/json:
                   value:
                     id: "1234"
                     type: food
                     price: 42
-                    name: burger
   /product/{id}:
     get:
       summary: Find product by ID
@@ -80,7 +83,7 @@ paths:
         "200":
           description: successful operation
           content:
-            application/json;charset=utf-8:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/Product'
               examples:
@@ -108,9 +111,11 @@ components:
           type: string
         type:
           type: string
-        name:
-          type: string
         version:
           type: string
         price:
           type: number
+      additionalProperties: false
+    inline_response_200:
+      oneOf:
+      - $ref: '#/components/schemas/Product'
